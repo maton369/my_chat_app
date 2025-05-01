@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
 
   await Supabase.initialize(
-    // TODO: ここにSupabaseのURLとAnon Keyを入力
-    url: 'https://mplhyxkupvgvpstmfxxh.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wbGh5eGt1cHZndnBzdG1meHhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYwNTU2MjYsImV4cCI6MjA2MTYzMTYyNn0.2yELO_I_4OkuZqziaTv-YnVr7FcKeyRag98_bfg3dsY',
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
   runApp(const MyApp());
 }
